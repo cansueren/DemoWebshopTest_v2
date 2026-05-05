@@ -1,24 +1,162 @@
-package pages;
+package pages; // Package für Page Object Klassen
 
-import org.openqa.selenium.By; // Import Locator-Werkzeuge zum Finden von Elementen auf der Webseite
-import org.openqa.selenium.WebDriver; // Import den Browser-Treiber für diese Seitenklasse (Browsersteuerung)
-import org.openqa.selenium.WebElement; // Import HTML-Element
-import org.openqa.selenium.support.ui.Select; // Importiert Selenium Befehle, für Select zb (Dropdown-Klasse)
+import org.openqa.selenium.By; // Locator zum Finden von Elementen
+import org.openqa.selenium.WebDriver; // Browser-Steuerung
+import org.openqa.selenium.WebElement; // HTML-Element
+import org.openqa.selenium.support.ui.Select; // Für Dropdowns
+import org.openqa.selenium.support.ui.WebDriverWait; // Für explizite Wartezeiten
+import org.openqa.selenium.support.ui.ExpectedConditions; // Bedingungen für Waits
 
+import java.time.Duration; // Zeitangabe für Wait (z. B. 10 Sekunden)
 
 public class CheckoutPage {
 
-    private WebDriver driver; // Speichert den Browser dieser Seite; private nur innerhalb dieser Klasse nutzbar
+    // Speichert die aktuelle Browser-Instanz
+    private WebDriver driver;
 
-    public CheckoutPage(WebDriver driver) { // Konstruktor erhält den geöffneten Browser beim Erstellen der Seite
-        this.driver = driver; // Übergibt den erhaltenen Browser an die Klassenvariable
-    }
-
-    public void selectBillingCountry(String countryName) { // Methode: wählt Land im Checkout-Dropdown aus
-        WebElement countryDropdown = driver.findElement(By.id("BillingNewAddress_CountryId")); // findet das <select>-Element über ID
-        Select select = new Select(countryDropdown); // erstellt Select-Objekt für Dropdown
-        select.selectByVisibleText(countryName); // wählt z.B. "Germany"
+    // Konstruktor bekommt den Driver aus dem Test übergeben
+    public CheckoutPage(WebDriver driver) {
+        this.driver = driver;
     }
 
 
+    // Wählt ein Land im Dropdown aus
+    public void selectBillingCountry(String countryName) {
+        WebElement countryDropdown = driver.findElement(By.id("BillingNewAddress_CountryId"));
+        Select select = new Select(countryDropdown);
+        select.selectByVisibleText(countryName);
+    }
+
+    // Trägt die Stadt ein
+    public void enterCity(String city) {
+        driver.findElement(By.id("BillingNewAddress_City")).sendKeys(city);
+    }
+
+    // Trägt die Adresse ein
+    public void enterAddress(String address) {
+        driver.findElement(By.id("BillingNewAddress_Address1")).sendKeys(address);
+    }
+
+    // Trägt die Postleitzahl ein
+    public void enterZip(String zip) {
+        driver.findElement(By.id("BillingNewAddress_ZipPostalCode")).sendKeys(zip);
+    }
+
+    // Trägt die Telefonnummer ein
+    public void enterPhone(String phone) {
+        driver.findElement(By.id("BillingNewAddress_PhoneNumber")).sendKeys(phone);
+    }
+
+    // Kombinierte Methode: füllt alle Pflichtfelder aus
+    public void fillBillingAddress(String country, String city, String address, String zip, String phone) {
+        selectNewAddress();
+        selectBillingCountry(country);
+        enterCity(city);
+        enterAddress(address);
+        enterZip(zip);
+        enterPhone(phone);
+    }
+
+    public void selectNewAddress() {
+        Select select = new Select(driver.findElement(By.id("billing-address-select")));
+        select.selectByVisibleText("New Address");
+    }
+
+
+    // Continue Buttons Checkout
+
+
+    // Klickt auf den Continue-Button im Billing Step
+    public void clickContinueBilling() {
+
+        // Wartet bis zu 10 Sekunden, bis das Element verfügbar ist
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Wartet gezielt darauf, dass der Continue Button klickbar ist
+        WebElement continueButton = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.cssSelector("input.new-address-next-step-button") // KORREKTER Selector
+                )
+        );
+
+        // Klickt auf den Button
+        continueButton.click();
+    }
+
+    public void clickContinueShippingAddress() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement continueButton = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.cssSelector("#shipping-buttons-container input.button-1") // KORREKTER Selector
+                )
+        );
+
+        continueButton.click();
+    }
+
+    public void clickContinueShippingMethod() {
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement continueButton = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.cssSelector("#shipping-method-buttons-container input.button-1")
+                )
+        );
+
+        continueButton.click();
+    }
+
+    public void clickContinuePaymentMethod() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement continueButton = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.cssSelector("#payment-method-buttons-container input.button-1")
+                )
+        );
+
+        continueButton.click();
+    }
+
+    public void clickContinuePaymentInformation() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement continueButton = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.cssSelector("#payment-info-buttons-container input.button-1")
+                )
+        );
+
+        continueButton.click();
+    }
+
+    public void clickConfirmOrder() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement confirmButton = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.cssSelector("#confirm-order-buttons-container input.button-1")
+                )
+        );
+
+        confirmButton.click();
+    }
+
+    public String getOrderNumber() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        WebElement orderNumberElement = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//li[contains(text(),'Order number')]")
+                )
+        );
+
+        String orderText = orderNumberElement.getText();
+
+        // nur Zahl zurückgeben
+        return orderText.replaceAll("[^0-9]", "");
+    }
 }

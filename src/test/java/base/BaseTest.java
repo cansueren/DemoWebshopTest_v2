@@ -5,11 +5,17 @@ import org.junit.jupiter.api.AfterEach; // Importiert @AfterEach, damit Code nac
 import org.openqa.selenium.WebDriver; // Importiert das WebDriver Interface zur allgemeinen Browsersteuerung
 import org.openqa.selenium.chrome.ChromeDriver; // Importiert ChromeDriver, um den Google Chrome Browser konkret zu starten
 import org.openqa.selenium.chrome.ChromeOptions; // Importiert ChromeOptions, um Chrome mit eigenen Einstellungen zu starten
+import pages.LoginPage; // Login mit festen User
+import pages.CartPage; // Reset Warenkorb
 
 
 public class BaseTest {
 
     protected WebDriver driver; // private = nur diese Klasse | protected = diese Klasse + erbende Kinderklassen | public = überall nutzbar
+
+    // Fester Test-User für Login in unabhängigen Tests
+    protected String TEST_EMAIL = "Test.user@test.de";
+    protected String TEST_PASSWORD = "Test123";
 
     @BeforeEach // Wird vor jedem Test automatisch ausgeführt und bereitet den Test vor
     public void setUp() { // Setup-Methode: startet vor jedem Test und bereitet Browser + Testumgebung vor
@@ -35,4 +41,29 @@ public class BaseTest {
 
         driver.quit();
     }
+
+    // Führt einen Login mit unserem festen Test-User aus
+    // Vorteil: Wir können diese Methode in jedem Test wiederverwenden
+    protected void loginAsDefaultUser() {
+
+        // Erstelle ein neues LoginPage-Objekt und übergebe den Browser (driver)
+        LoginPage loginPage = new LoginPage(driver);
+
+        // Öffnet die Login-Seite im Browser
+        loginPage.openLoginPage();
+
+        // Trägt die vordefinierte Test-Email in das Email-Feld ein
+        loginPage.enterEmail(TEST_EMAIL);
+
+        // Trägt das vordefinierte Passwort in das Passwort-Feld ein
+        loginPage.enterPassword(TEST_PASSWORD);
+
+        // Klickt auf den Login-Button, um sich einzuloggen
+        loginPage.clickLoginButton();
+
+        CartPage cartPage = new CartPage(driver);
+        cartPage.clearCart();
+        cartPage.goToHomePage();
+    }
+
 }

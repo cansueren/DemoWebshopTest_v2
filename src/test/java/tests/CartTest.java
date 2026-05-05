@@ -1,36 +1,48 @@
-package tests; // Diese Datei gehört zum Package tests für Testklassen
+package tests;
 
-import base.BaseTest; // Importiert unsere Basisklasse mit Browser-Setup und driver
-import org.junit.jupiter.api.Test; // Importiert die @Test Annotation für JUnit
-import pages.CartPage; // Importiert unsere Cart-Seitenklasse
-import org.junit.jupiter.api.Assertions; // Importiert Assertion-Befehle zum Prüfen von Erwartungen
+import base.BaseTest;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+import pages.CartPage;
 
-public class CartTest extends BaseTest { // Testklasse erbt Browser-Setup und driver aus BaseTest
+public class CartTest extends BaseTest {
 
+    @Test
+    public void userCanAddLaptopToCart() {
 
-    @Test // Markiert die folgende Methode als ausführbaren JUnit-Test
-    public void userCanAddLaptopToCart() { // Test prüft, ob ein Laptop gesucht und ausgewählt werden kann
+        // Login mit festem Test-User (inkl. Cart Reset)
+        loginAsDefaultUser();
 
-        CartPage cartPage = new CartPage(driver); // Erstellt das Seitenobjekt und übergibt den Browser
+        // Page Objekt initialisieren
+        CartPage cartPage = new CartPage(driver);
 
-        cartPage.enterSearchText("laptop"); // Trägt laptop in das Suchfeld ein
-        cartPage.selectLaptopSuggestion(); // Wählt den Vorschlag 14.1-inch Laptop aus
-        cartPage.clickSearchButton(); // Klickt auf den Search-Button
+        // Produktname zentral definieren
+        String productName = "14.1-inch Laptop";
 
-        cartPage.clickAddToCart(); // Fügt den Laptop dem Warenkorb hinzu
-        cartPage.openShoppingCart(); // Öffnet den Warenkorb oben rechts
+        // Produkt suchen und auswählen
+        cartPage.enterSearchText(productName);
+        cartPage.selectLaptopSuggestion();
 
+        // Produkt in den Warenkorb legen
+        cartPage.clickAddToCart();
+
+        // Warenkorb öffnen
+        cartPage.openShoppingCart();
+
+        // Prüfen, ob Produkt im Warenkorb ist
         Assertions.assertTrue(
-                cartPage.isProductInCart("14.1-inch Laptop")
+                cartPage.isProductInCart(productName),
+                "Produkt wurde nicht zum Warenkorb hinzugefügt"
         );
 
-        cartPage.selectCountry("Germany"); // Ich wähle Germany aus meiner Dropdown Liste aus
-        cartPage.clickTermsButton(); // Klickt auf TermsButton
-        cartPage.clickCheckoutButton(); // Auf Checkout klicken
+        // Menge auslesen
+        int actualQuantity = cartPage.getQuantityForProduct(productName);
 
-
-
-
-
+        // Menge prüfen
+        Assertions.assertEquals(
+                1,
+                actualQuantity,
+                "Erwartet: 1 aber war: " + actualQuantity
+        );
     }
 }

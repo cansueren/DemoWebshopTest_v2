@@ -1,6 +1,7 @@
 package tests; // Diese Datei gehört zum Package tests für Testklassen
 
 import base.BaseTest; // Importiert unsere Basisklasse mit Browser-Setup und driver
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test; // Importiert die @Test Annotation für JUnit
 import pages.RegistrationPage; // Importiert die Registrierungs-Seitenklasse
 import pages.LoginPage; // Importiert die Login-Seitenklasse
@@ -41,6 +42,27 @@ public class E2ETest extends BaseTest { // Testklasse erbt Browser-Setup und dri
         cartPage.selectLaptopSuggestion(); // Wählt Laptop aus Vorschlagsliste
         cartPage.clickAddToCart(); // Fügt Produkt dem Warenkorb hinzu
         cartPage.openShoppingCart(); // Öffnet Warenkorb
+
+        String productName = "14.1-inch Laptop";
+        int expectedQuantity = 1;
+
+        // Ich prüfe, ob das Produkt im Warenkorb ist
+        Assertions.assertTrue(
+                cartPage.isProductInCart(productName),
+                "Produkt wurde nicht zum Warenkorb hinzugefügt"
+        );
+
+        // Ich hole mir die tatsächliche Menge
+        int actualQuantity = cartPage.getQuantityForProduct(productName);
+
+        // Ich vergleiche erwartete und tatsächliche Menge
+        Assertions.assertEquals(
+                expectedQuantity,
+                actualQuantity,
+                "Erwartet: " + expectedQuantity + " aber war: " + actualQuantity
+        );
+
+
         cartPage.selectCountry("Germany"); // wählt Germany aus
         cartPage.clickTermsButton(); // Klickt auf TermsButton
         cartPage.clickCheckoutButton(); // Auf Checkout klicken

@@ -68,6 +68,56 @@ public class CartPage { // Seitenklasse für Warenkorb- und Produktaktionen
     }
 
 
+    public int getQuantityForProduct(String productName) {
 
+        // Ich hole mir alle Zeilen im Warenkorb
+        List<WebElement> rows = driver.findElements(By.cssSelector(".cart-item-row"));
+
+        // Ich gehe jede Zeile durch
+        for (WebElement row : rows) {
+
+            // Ich hole mir den Produktnamen aus der aktuellen Zeile
+            String name = row.findElement(By.cssSelector("td.product a")).getText();
+
+            // Ich prüfe, ob es mein gesuchtes Produkt ist
+            if (name.equals(productName)) {
+
+                // Ich hole mir das Mengenfeld (Input)
+                WebElement quantityInput = row.findElement(By.cssSelector("input.qty-input"));
+
+                // Ich lese den Wert und wandle ihn in eine Zahl um
+                return Integer.parseInt(quantityInput.getAttribute("value"));
+            }
+        }
+
+        // Falls das Produkt nicht gefunden wurde, werfe ich einen Fehler
+        throw new RuntimeException("Produkt nicht im Warenkorb gefunden");
+    }
+
+    // Leert den kompletten Warenkorb
+    public void clearCart() {
+
+        // Öffnet den Warenkorb
+        driver.findElement(By.linkText("Shopping cart")).click();
+
+        // Holt alle "Remove"-Checkboxen (für jedes Produkt im Warenkorb)
+        List<WebElement> removeCheckboxes = driver.findElements(By.name("removefromcart"));
+
+        // Prüft, ob überhaupt Produkte im Warenkorb sind
+        if (!removeCheckboxes.isEmpty()) {
+
+            // Markiert alle Produkte zum Entfernen
+            for (WebElement checkbox : removeCheckboxes) {
+                checkbox.click();
+            }
+
+            // Klickt auf "Update Cart", um die Entfernung zu bestätigen
+            driver.findElement(By.name("updatecart")).click();
+        }
+    }
+
+    public void goToHomePage() {
+        driver.get("https://demowebshop.tricentis.com/");
+    }
 
 }
