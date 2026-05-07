@@ -19,37 +19,36 @@ public class CheckoutPage {
         this.driver = driver;
     }
 
+    private void selectBillingCountry(String countryName) {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
 
-    // Wählt ein Land im Dropdown aus
-    public void selectBillingCountry(String countryName) {
-        WebElement countryDropdown = driver.findElement(By.id("BillingNewAddress_CountryId"));
+        WebElement countryDropdown = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(By.id("BillingNewAddress_CountryId"))
+        );
+
         Select select = new Select(countryDropdown);
         select.selectByVisibleText(countryName);
     }
 
-    // Trägt die Stadt ein
-    public void enterCity(String city) {
+    private void enterCity(String city) {
         driver.findElement(By.id("BillingNewAddress_City")).sendKeys(city);
     }
 
-    // Trägt die Adresse ein
-    public void enterAddress(String address) {
+    private void enterAddress(String address) {
         driver.findElement(By.id("BillingNewAddress_Address1")).sendKeys(address);
     }
 
-    // Trägt die Postleitzahl ein
-    public void enterZip(String zip) {
+    private void enterZip(String zip) {
         driver.findElement(By.id("BillingNewAddress_ZipPostalCode")).sendKeys(zip);
     }
 
-    // Trägt die Telefonnummer ein
-    public void enterPhone(String phone) {
+    private void enterPhone(String phone) {
         driver.findElement(By.id("BillingNewAddress_PhoneNumber")).sendKeys(phone);
     }
 
     // Kombinierte Methode: füllt alle Pflichtfelder aus
     public void fillBillingAddress(String country, String city, String address, String zip, String phone) {
-        selectNewAddress();
+        selectNewAddressIfAvailable();
         selectBillingCountry(country);
         enterCity(city);
         enterAddress(address);
@@ -57,9 +56,11 @@ public class CheckoutPage {
         enterPhone(phone);
     }
 
-    public void selectNewAddress() {
-        Select select = new Select(driver.findElement(By.id("billing-address-select")));
-        select.selectByVisibleText("New Address");
+    public void selectNewAddressIfAvailable() {
+        if (!driver.findElements(By.id("billing-address-select")).isEmpty()) {
+            Select select = new Select(driver.findElement(By.id("billing-address-select")));
+            select.selectByVisibleText("New Address");
+        }
     }
 
 
@@ -158,5 +159,20 @@ public class CheckoutPage {
 
         // nur Zahl zurückgeben
         return orderText.replaceAll("[^0-9]", "");
+    }
+
+    public boolean isOrderSuccessfullyProcessed() {
+        // Erstellt einen expliziten Wait, damit Selenium maximal 10 Sekunden auf die Erfolgsmeldung wartet
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Wartet, bis die Erfolgsmeldung auf der Bestellabschluss-Seite sichtbar ist
+        WebElement successMessage = wait.until(
+                ExpectedConditions.visibilityOfElementLocated(
+                        By.xpath("//strong[contains(text(),'successfully processed')]")
+                )
+        );
+
+        // Prüft, ob der Text der Erfolgsmeldung den erwarteten Erfolgsinhalt enthält
+        return successMessage.getText().contains("successfully processed");
     }
 }

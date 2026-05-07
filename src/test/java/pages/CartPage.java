@@ -5,6 +5,10 @@ import org.openqa.selenium.WebDriver; // Importiert den Browser-Treiber für die
 import org.openqa.selenium.WebElement; // Importiert
 import org.openqa.selenium.support.ui.Select; // Importiert Selenium Befehle, für Select zb
 import java.util.List; // für List
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+
+import java.time.Duration;
 
 
 public class CartPage { // Seitenklasse für Warenkorb- und Produktaktionen
@@ -20,20 +24,59 @@ public class CartPage { // Seitenklasse für Warenkorb- und Produktaktionen
         driver.findElement(By.id("small-searchterms")).sendKeys(productName); // Selenium-Befehl: findet das Suchfeld über id und schreibt den Text hinein
     }
 
-    public void selectLaptopSuggestion() { // Methode: wählt den Vorschlag 14.1-inch Laptop aus der Suchliste aus
-        driver.findElement(By.linkText("14.1-inch Laptop")).click(); // Selenium-Befehl: findet den Vorschlag über sichtbaren Text und klickt darauf
+    public void selectLaptopSuggestion() {
+        // Erstellt einen expliziten Wait, damit Selenium auf das Suchergebnis warten kann
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Wartet, bis der Produktlink "14.1-inch Laptop" sichtbar und klickbar ist
+        WebElement laptopSuggestion = wait.until(
+                ExpectedConditions.elementToBeClickable(By.linkText("14.1-inch Laptop"))
+        );
+
+        // Klickt auf den Produktlink und öffnet die Produktdetailseite
+        laptopSuggestion.click();
     }
 
     public void clickSearchButton() { // Methode: klickt auf den Search-Button
         driver.findElement(By.cssSelector("input[value='Search']")).click(); // Selenium-Befehl: findet den Button über value und klickt darauf
     }
 
-    public void clickAddToCart() { // Methode: klickt auf den Add-to-cart-Button des ausgewählten Laptops
-        driver.findElement(By.cssSelector("input[value='Add to cart']")).click(); // klickt den Button über den value-Text
+    public void clickAddToCart() {
+        // Erstellt einen expliziten Wait, damit Selenium maximal 10 Sekunden auf bestimmte Bedingungen wartet
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Wartet, bis der Add-to-cart-Button sichtbar und klickbar ist
+        WebElement addToCartButton = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.cssSelector("input[value='Add to cart']")
+                )
+        );
+
+        // Klickt auf den Add-to-cart-Button und fügt das Produkt dem Warenkorb hinzu
+        addToCartButton.click();
+
+        // Wartet, bis die Warenkorb-Anzeige oben auf der Seite auf "(1)" aktualisiert wurde
+        // Dadurch wird sichergestellt, dass das Produkt wirklich im Warenkorb gelandet ist
+        wait.until(
+                ExpectedConditions.textToBePresentInElementLocated(
+                        By.cssSelector("span.cart-qty"),
+                        "(1)"
+                )
+        );
     }
 
-    public void openShoppingCart() { // Methode: öffnet den Warenkorb oben rechts
-        driver.findElement(By.linkText("Shopping cart")).click(); // Selenium-Befehl: findet den Link über sichtbaren Text und klickt darauf
+    public void openShoppingCart() {
+        // Erstellt einen expliziten Wait, damit Selenium auf den Warenkorb-Link warten kann
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+
+        // Wartet, bis der Warenkorb-Link sichtbar und klickbar ist
+        // Der CSS-Selektor ist stabiler als LinkText, weil sich der Text von "Shopping cart(0)" zu "Shopping cart(1)" ändern kann
+        WebElement shoppingCartLink = wait.until(
+                ExpectedConditions.elementToBeClickable(By.cssSelector("a.ico-cart"))
+        );
+
+        // Klickt auf den Warenkorb-Link und öffnet die Warenkorb-Seite
+        shoppingCartLink.click();
     }
 
     public void selectCountry(String countryName) { // Methode: wählt ein Land aus dem Country-Dropdown aus

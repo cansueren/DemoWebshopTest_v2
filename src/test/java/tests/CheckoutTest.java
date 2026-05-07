@@ -65,16 +65,8 @@ public class CheckoutTest extends BaseTest {
         checkoutPage.clickConfirmOrder();
 
 
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-
-        WebElement successMessage = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(
-                        By.xpath("//strong[contains(text(),'successfully processed')]")
-                )
-        );
-
         Assertions.assertTrue(
-                successMessage.getText().contains("successfully processed"),
+                checkoutPage.isOrderSuccessfullyProcessed(),
                 "Checkout war nicht erfolgreich"
         );
 

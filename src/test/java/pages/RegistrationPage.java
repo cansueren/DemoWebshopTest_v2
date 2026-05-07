@@ -32,7 +32,7 @@ public class RegistrationPage { // Seitenklasse für die Registrierungsseite mit
 
     }
 
-    public void enterEmail(String email) { // Methode: trägt die übergebene Email in das Email-Feld ein
+    public void enterEmail(String email) { // Methode: trägt die übergebeSne Email in das Email-Feld ein
         driver.findElement(By.id("Email")).sendKeys(email); // Selenium-Befehl: findet das Feld über id und schreibt die Email hinein
     }
 

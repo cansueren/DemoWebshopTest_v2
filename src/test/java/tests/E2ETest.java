@@ -16,6 +16,7 @@ public class E2ETest extends BaseTest { // Testklasse erbt Browser-Setup und dri
         RegistrationPage registrationPage = new RegistrationPage(driver); // Erstellt das Seitenobjekt für Registrierung
         LoginPage loginPage = new LoginPage(driver); // Erstellt das Seitenobjekt für Login
         CartPage cartPage = new CartPage(driver); // Erstellt das Seitenobjekt für Warenkorb
+        CheckoutPage checkoutPage = new CheckoutPage(driver); // Erstellt das Seitenobjekt für Checkout
 
         String email = "Max.mustermann" + System.currentTimeMillis() + "@test.de"; // Erstellt eine dynamische eindeutige Email
         String password = "Test123"; // Erstellt ein Passwort für Registrierung und Login
@@ -52,7 +53,7 @@ public class E2ETest extends BaseTest { // Testklasse erbt Browser-Setup und dri
                 "Produkt wurde nicht zum Warenkorb hinzugefügt"
         );
 
-        // Ich hole mir die tatsächliche Menge
+        // Tatsächliche Menge überprüfen
         int actualQuantity = cartPage.getQuantityForProduct(productName);
 
         // Ich vergleiche erwartete und tatsächliche Menge
@@ -64,7 +65,43 @@ public class E2ETest extends BaseTest { // Testklasse erbt Browser-Setup und dri
 
 
         cartPage.selectCountry("Germany"); // wählt Germany aus
-        cartPage.clickTermsButton(); // Klickt auf TermsButton
-        cartPage.clickCheckoutButton(); // Auf Checkout klicken
+        cartPage.clickTermsButton(); // Klickt TermsButton
+        cartPage.clickCheckoutButton(); // Checkout klicken
+
+        // Checkout
+        checkoutPage.fillBillingAddress(
+                "Germany",
+                "Hamburg",
+                "Musterstraße 1",
+                "20095",
+                "017612345678"
+        );
+
+        checkoutPage.clickContinueBilling();
+
+        Assertions.assertTrue(
+                driver.getPageSource().contains("Shipping address"),
+                "Billing Address konnte nicht abgeschlossen werden"
+        );
+
+        checkoutPage.clickContinueShippingAddress();
+        checkoutPage.clickContinueShippingMethod();
+        checkoutPage.clickContinuePaymentMethod();
+        checkoutPage.clickContinuePaymentInformation();
+        checkoutPage.clickConfirmOrder();
+
+        Assertions.assertTrue(
+                checkoutPage.isOrderSuccessfullyProcessed(),
+                "Checkout war nicht erfolgreich"
+        );
+
+        String orderNumber = checkoutPage.getOrderNumber();
+
+        System.out.println("Order Number: " + orderNumber);
+
+        Assertions.assertFalse(
+                orderNumber.isEmpty(),
+                "Order Number ist leer - Checkout fehlgeschlagen"
+        );
     }
 }
