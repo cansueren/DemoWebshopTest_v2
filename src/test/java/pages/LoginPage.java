@@ -5,8 +5,8 @@ import org.openqa.selenium.WebDriver;           // Importiert den Browser-Treibe
 
 public class LoginPage extends BasePage {       // LoginPage erbt gemeinsame Selenium-Hilfsmethoden aus BasePage
 
-    public LoginPage(WebDriver driver) { // Konstruktor erhält den geöffneten Browser beim Erstellen der LoginPage
-        super(driver); // Übergibt den driver an die BasePage, damit dort driver und wait initialisiert werden
+    public LoginPage(WebDriver driver) {        // Konstruktor erhält den geöffneten Browser beim Erstellen der LoginPage
+        super(driver);                          // Übergibt den driver an die BasePage, damit dort driver und wait initialisiert werden
     }
 
     public void openLoginPage() { // Methode: öffnet die Login-Seite über den Log in-Link
