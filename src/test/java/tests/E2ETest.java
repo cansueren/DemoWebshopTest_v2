@@ -7,6 +7,7 @@ import pages.RegistrationPage; // Importiert die RegistrationPage mit allen Regi
 import pages.LoginPage; // Importiert die LoginPage mit allen Login-Aktionen
 import pages.CartPage; // Importiert die CartPage mit Warenkorb- und Produktaktionen
 import pages.CheckoutPage; // Importiert die CheckoutPage mit allen Checkout-Aktionen
+import utils.RandomDataUtil; // Importiert die Hilfsklasse für dynamische Testdaten
 
 public class E2ETest extends BaseTest { // E2E-Testklasse; erbt Browser-Setup, driver und Cleanup aus BaseTest
 
@@ -18,7 +19,7 @@ public class E2ETest extends BaseTest { // E2E-Testklasse; erbt Browser-Setup, d
         CartPage cartPage = new CartPage(driver); // Erstellt das Page Object für Warenkorb- und Produktaktionen
         CheckoutPage checkoutPage = new CheckoutPage(driver); // Erstellt das Page Object für den Checkout
 
-        String email = "Max.mustermann" + System.currentTimeMillis() + "@test.de"; // Erstellt eine eindeutige dynamische E-Mail-Adresse
+        String email = RandomDataUtil.generateEmail(); // Erzeugt eine eindeutige E-Mail-Adresse für die Registrierung
         String password = "Test123!"; // Speichert das Passwort zentral für Registrierung und Login
 
         String productName = "14.1-inch Laptop"; // Speichert den Produktnamen zentral

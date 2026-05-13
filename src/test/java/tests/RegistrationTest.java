@@ -4,6 +4,7 @@ import base.BaseTest;                                   // Importiert unsere Bas
 import org.junit.jupiter.api.Test;                      // Importiert @Test, damit JUnit diese Methode als Test ausführt
 import pages.RegistrationPage;                          // Importiert unsere Page-Klasse mit den Registrierungsfunktionen
 import org.junit.jupiter.api.Assertions;                // Importiert Assertion-Befehle zum Prüfen von Erwartungen
+import utils.RandomDataUtil;                            // Importiert die Hilfsklasse zum Erzeugen dynamischer Testdaten
 
 public class RegistrationTest extends BaseTest {        // Testklasse erbt Browser Setup und driver aus BaseTest
 
@@ -18,7 +19,7 @@ public class RegistrationTest extends BaseTest {        // Testklasse erbt Brows
         registrationPage.enterFirstName("Max"); // Übergibt den Text Can an unsere Methode und trägt ihn ins Feld ein
         registrationPage.enterLastName("Mustermann"); // Wir übergeben unseren Nachnamen Text "Suren"
 
-        String email = "Max.mustermann" + System.currentTimeMillis() + "@test.de"; // Erstellt eine einzigartige Email mit aktuellem Zeitstempel
+        String email = RandomDataUtil.generateEmail(); // Erzeugt eine eindeutige E-Mail-Adresse für die Registrierung
         registrationPage.enterEmail(email); // Übergibt die erzeugte Email an unsere Page-Methode und trägt sie ein
 
         String password = "Test123!"; // Speichert das Passwort als Textvariable, damit wir es für beide Felder verwenden
