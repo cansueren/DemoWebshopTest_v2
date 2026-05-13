@@ -36,7 +36,7 @@ public class BaseTest {
     }
 
 
-    //@AfterEach // Wird nach jedem Test automatisch ausgeführt und räumt die Testumgebung auf
+    @AfterEach // Wird nach jedem Test automatisch ausgeführt und räumt die Testumgebung auf
     public void cleanUp() { // Aufräum-Methode nach jedem Test, z. B. Browser sauber schließen und Testumgebung zurücksetzen
 
         driver.quit();
