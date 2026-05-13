@@ -3,14 +3,9 @@ package tests; // Test Package
 import base.BaseTest; // Basis mit Setup + Login
 import org.junit.jupiter.api.Test; // JUnit Test Annotation
 import org.junit.jupiter.api.Assertions; // Assertions
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.CartPage; // Warenkorb Page
 import pages.CheckoutPage; // Checkout Page
 
-import java.time.Duration;
 
 public class CheckoutTest extends BaseTest {
 
