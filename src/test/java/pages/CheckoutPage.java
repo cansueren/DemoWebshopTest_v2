@@ -1,13 +1,13 @@
-package pages; // Package für Page Object Klassen
+package pages;                                              // Package für Page Object Klassen
 
-import org.openqa.selenium.By; // Locator zum Finden von Elementen
-import org.openqa.selenium.WebDriver; // Browser-Steuerung
-import org.openqa.selenium.WebElement; // HTML-Element
-import org.openqa.selenium.support.ui.Select; // Für Dropdowns
-import org.openqa.selenium.support.ui.WebDriverWait; // Für explizite Wartezeiten
-import org.openqa.selenium.support.ui.ExpectedConditions; // Bedingungen für Waits
+import org.openqa.selenium.By;                              // Locator zum Finden von Elementen
+import org.openqa.selenium.WebDriver;                       // Browser-Steuerung
+import org.openqa.selenium.WebElement;                      // HTML-Element
+import org.openqa.selenium.support.ui.Select;               // Für Dropdowns
+import org.openqa.selenium.support.ui.WebDriverWait;        // Für explizite Wartezeiten
+import org.openqa.selenium.support.ui.ExpectedConditions;   // Bedingungen für Waits
 
-import java.time.Duration; // Zeitangabe für Wait (z. B. 10 Sekunden)
+import java.time.Duration;                                  // Zeitangabe für Wait (z. B. 10 Sekunden)
 
 public class CheckoutPage {
 

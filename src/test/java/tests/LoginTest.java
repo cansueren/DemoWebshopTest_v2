@@ -25,10 +25,9 @@ public class LoginTest extends BaseTest { // Testklasse erbt Browser-Setup und V
         // Klickt auf den Login-Button
         loginPage.clickLoginButton();
 
-        // Prüft, ob nach dem Login der Text "Log out" sichtbar ist
-        // Wenn ja, war der Login erfolgreich
+        // Prüft, ob nach dem Login der Logout-Link sichtbar ist
         Assertions.assertTrue(
-                driver.getPageSource().contains("Log out"),
+                loginPage.isLoginSuccessful(),
                 "Login war nicht erfolgreich!"
         );
     }

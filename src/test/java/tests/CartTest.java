@@ -18,6 +18,7 @@ public class CartTest extends BaseTest {
 
         // Produktname zentral definieren
         String productName = "14.1-inch Laptop";
+        int expectedQuantity = 1; // Speichert die erwartete Produktmenge im Warenkorb
 
         // Produkt suchen und auswählen
         cartPage.enterSearchText(productName);
@@ -38,11 +39,10 @@ public class CartTest extends BaseTest {
         // Menge auslesen
         int actualQuantity = cartPage.getQuantityForProduct(productName);
 
-        // Menge prüfen
         Assertions.assertEquals(
-                1,
+                expectedQuantity,
                 actualQuantity,
-                "Erwartet: 1 aber war: " + actualQuantity
+                "Erwartet: " + expectedQuantity + ", aber war: " + actualQuantity
         );
     }
 }

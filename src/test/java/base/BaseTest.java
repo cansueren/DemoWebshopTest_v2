@@ -1,12 +1,12 @@
-package base; // Diese Datei gehört zur Klasse base. Das ist unser Fundament / unsere Zentrale für andere Klassem, für die Nutzung von Funktionen
+package base;                                       // Diese Datei gehört zur Klasse base. Das ist unser Fundament / unsere Zentrale für andere Klassem, für die Nutzung von Funktionen
 
-import org.junit.jupiter.api.BeforeEach; // Importiert @BeforeEach, damit Code vor jedem Test automatisch ausgeführt wird
-import org.junit.jupiter.api.AfterEach; // Importiert @AfterEach, damit Code nach jedem Test automatisch ausgeführt wird
-import org.openqa.selenium.WebDriver; // Importiert das WebDriver Interface zur allgemeinen Browsersteuerung
-import org.openqa.selenium.chrome.ChromeDriver; // Importiert ChromeDriver, um den Google Chrome Browser konkret zu starten
-import org.openqa.selenium.chrome.ChromeOptions; // Importiert ChromeOptions, um Chrome mit eigenen Einstellungen zu starten
-import pages.LoginPage; // Login mit festen User
-import pages.CartPage; // Reset Warenkorb
+import org.junit.jupiter.api.BeforeEach;            // Importiert @BeforeEach, damit Code vor jedem Test automatisch ausgeführt wird
+import org.junit.jupiter.api.AfterEach;             // Importiert @AfterEach, damit Code nach jedem Test automatisch ausgeführt wird
+import org.openqa.selenium.WebDriver;               // Importiert das WebDriver Interface zur allgemeinen Browsersteuerung
+import org.openqa.selenium.chrome.ChromeDriver;     // Importiert ChromeDriver, um den Google Chrome Browser konkret zu starten
+import org.openqa.selenium.chrome.ChromeOptions;    // Importiert ChromeOptions, um Chrome mit eigenen Einstellungen zu starten
+import pages.LoginPage;                             // Login mit festen User
+import pages.CartPage;                              // Reset Warenkorb
 
 
 public class BaseTest {
@@ -36,7 +36,7 @@ public class BaseTest {
     }
 
 
-    // @AfterEach // Wird nach jedem Test automatisch ausgeführt und räumt die Testumgebung auf
+    @AfterEach // Wird nach jedem Test automatisch ausgeführt und räumt die Testumgebung auf
     public void cleanUp() { // Aufräum-Methode nach jedem Test, z. B. Browser sauber schließen und Testumgebung zurücksetzen
 
         driver.quit();

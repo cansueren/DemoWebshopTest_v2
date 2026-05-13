@@ -1,14 +1,14 @@
-package tests; // Diese Datei gehört zum Package tests für Testklassen
+package tests;                              // Diese Datei gehört zum Package tests für Testklassen
 
-import base.BaseTest; // Importiert unsere Basisklasse mit Browser-Setup und driver
+import base.BaseTest;                       // Importiert unsere Basisklasse mit Browser-Setup und driver
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test; // Importiert die @Test Annotation für JUnit
-import pages.RegistrationPage; // Importiert die Registrierungs-Seitenklasse
-import pages.LoginPage; // Importiert die Login-Seitenklasse
-import pages.CartPage; // Importiert die Warenkorb-Seitenklasse
-import pages.CheckoutPage; // Importiert die Checkout-Seitenklasse
+import org.junit.jupiter.api.Test;          // Importiert die @Test Annotation für JUnit
+import pages.RegistrationPage;              // Importiert die Registrierungs-Seitenklasse
+import pages.LoginPage;                     // Importiert die Login-Seitenklasse
+import pages.CartPage;                      // Importiert die Warenkorb-Seitenklasse
+import pages.CheckoutPage;                  // Importiert die Checkout-Seitenklasse
 
-public class E2ETest extends BaseTest { // Testklasse erbt Browser-Setup und driver aus BaseTest
+public class E2ETest extends BaseTest {     // Testklasse erbt Browser-Setup und driver aus BaseTest
 
     @Test // Markiert die folgende Methode als ausführbaren JUnit-Test
     public void userCanCompleteFullPurchaseFlow() { // Test prüft den kompletten Ablauf von Registrierung bis Warenkorb
