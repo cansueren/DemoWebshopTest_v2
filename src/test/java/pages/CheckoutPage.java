@@ -9,10 +9,12 @@ import org.openqa.selenium.support.ui.ExpectedConditions;   // Bedingungen für 
 
 import java.time.Duration;                                  // Zeitangabe für Wait (z. B. 10 Sekunden)
 
+
 public class CheckoutPage {
 
     private WebDriver driver;                               // Speichert die aktuelle Browser-Instanz
     private WebDriverWait wait;                             // Speichert den expliziten Wait, damit alle Checkout-Methoden gezielt warten können
+
 
     public CheckoutPage(WebDriver driver) { // Konstruktor bekommt den Driver aus dem Test übergeben
         this.driver = driver; // Übergibt den Browser an die Klassenvariable

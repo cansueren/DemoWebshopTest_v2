@@ -1,11 +1,11 @@
-package tests;  // Diese Datei gehört zum Package tests für ausführbare Testklassen
+package tests;                                          // Diese Datei gehört zum Package tests für ausführbare Testklassen
 
-import base.BaseTest; // Importiert unsere Basisklasse mit driver, Browserstart und cleanUp
-import org.junit.jupiter.api.Test; // Importiert @Test, damit JUnit diese Methode als Test ausführt
-import pages.RegistrationPage; // Importiert unsere Page-Klasse mit den Registrierungsfunktionen
-import org.junit.jupiter.api.Assertions; // Importiert Assertion-Befehle zum Prüfen von Erwartungen
+import base.BaseTest;                                   // Importiert unsere Basisklasse mit driver, Browserstart und cleanUp
+import org.junit.jupiter.api.Test;                      // Importiert @Test, damit JUnit diese Methode als Test ausführt
+import pages.RegistrationPage;                          // Importiert unsere Page-Klasse mit den Registrierungsfunktionen
+import org.junit.jupiter.api.Assertions;                // Importiert Assertion-Befehle zum Prüfen von Erwartungen
 
-public class RegistrationTest extends BaseTest { // Testklasse erbt Browser Setup und driver aus BaseTest
+public class RegistrationTest extends BaseTest {        // Testklasse erbt Browser Setup und driver aus BaseTest
 
 
     @Test // Markiert die folgende Methode als ausführbaren JUnit-Test

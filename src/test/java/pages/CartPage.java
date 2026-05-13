@@ -4,19 +4,17 @@ import org.openqa.selenium.By;                              // Importiert Locato
 import org.openqa.selenium.WebDriver;                       // Importiert den Browser-Treiber für diese Seitenklasse
 import org.openqa.selenium.WebElement;                      // Ermöglicht das Speichern und Verwenden eines gefundenen HTML-Elements
 import org.openqa.selenium.support.ui.Select;               // Importiert Selenium Befehle, für Select zb
-
 import java.util.List;                                      // für List
-
 import org.openqa.selenium.support.ui.WebDriverWait;        // Ermöglicht explizites Warten auf bestimmte Bedingungen
 import org.openqa.selenium.support.ui.ExpectedConditions;   // Stellt vordefinierte Wartebedingungen bereit, z. B. sichtbar oder klickbar
 
 import java.time.Duration;                                  // Definiert die max. Wartezeit für den WebDriverWait
 
 
-public class CartPage { // Seitenklasse für Warenkorb- und Produktaktionen
+public class CartPage {                                     // Seitenklasse für Warenkorb- und Produktaktionen
 
-    private WebDriver driver; // Speichert den Browser dieser Seite; private nur innerhalb dieser Klasse nutzbar
-    private WebDriverWait wait; // Speichert den expliziten Wait, damit alle Methoden gezielt auf Elemente warten können
+    private WebDriver driver;                               // Speichert den Browser dieser Seite; private nur innerhalb dieser Klasse nutzbar
+    private WebDriverWait wait;                             // Speichert den expliziten Wait, damit alle Methoden gezielt auf Elemente warten können
 
 
     public CartPage(WebDriver driver) { // Konstruktor erhält den geöffneten Browser beim Erstellen der Seite

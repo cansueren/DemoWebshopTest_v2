@@ -1,11 +1,11 @@
-package tests;
+package tests;                                      // Diese Datei gehört zum Package tests für ausführbare Testklassen
 
-import base.BaseTest;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
-import pages.CartPage;
+import base.BaseTest;                               // Importiert die Basisklasse mit Browser-Setup, Login-Hilfsmethoden und Cleanup
+import org.junit.jupiter.api.Assertions;            // Importiert Assertion-Methoden, um erwartete und tatsächliche Ergebnisse zu prüfen
+import org.junit.jupiter.api.Test;                  // Importiert die @Test-Annotation, damit JUnit die Methode als Test erkennt
+import pages.CartPage;                              // Importiert die CartPage, über die Warenkorb- und Produktaktionen ausgeführt werden
 
-public class CartTest extends BaseTest {
+public class CartTest extends BaseTest {            // CartTest erbt den WebDriver und gemeinsame Testlogik aus BaseTest
 
     @Test
     public void userCanAddLaptopToCart() {

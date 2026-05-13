@@ -1,15 +1,15 @@
-package tests; // Diese Datei gehört zum Package tests für ausführbare Testklassen
+package tests;                                      // Diese Datei gehört zum Package tests für ausführbare Testklassen
 
-import base.BaseTest; // Importiert die Basistestklasse mit Browser-Setup, Login-Hilfsmethoden und Cleanup
-import org.junit.jupiter.api.Assertions; // Importiert Assertion-Befehle zum Prüfen von erwarteten Ergebnissen
-import org.junit.jupiter.api.Test; // Importiert @Test, damit JUnit diese Methode als Test erkennt
-import pages.CartPage; // Importiert die CartPage mit Warenkorb- und Produktaktionen
-import pages.CheckoutPage; // Importiert die CheckoutPage mit allen Checkout-Aktionen
+import base.BaseTest;                               // Importiert die Basistestklasse mit Browser-Setup, Login-Hilfsmethoden und Cleanup
+import org.junit.jupiter.api.Assertions;            // Importiert Assertion-Befehle zum Prüfen von erwarteten Ergebnissen
+import org.junit.jupiter.api.Test;                  // Importiert @Test, damit JUnit diese Methode als Test erkennt
+import pages.CartPage;                              // Importiert die CartPage mit Warenkorb- und Produktaktionen
+import pages.CheckoutPage;                          // Importiert die CheckoutPage mit allen Checkout-Aktionen
 
-public class CheckoutTest extends BaseTest { // Testklasse für den Checkout-Prozess, erbt den driver aus BaseTest
+public class CheckoutTest extends BaseTest {        // Testklasse für den Checkout-Prozess, erbt den driver aus BaseTest
 
-    @Test // Markiert die folgende Methode als ausführbaren JUnit-Test
-    public void userCanCheckoutSuccessfully() { // Test prüft, ob ein Benutzer erfolgreich eine Bestellung abschließen kann
+    @Test                                           // Markiert die folgende Methode als ausführbaren JUnit-Test
+    public void userCanCheckoutSuccessfully() {     // Test prüft, ob ein Benutzer erfolgreich eine Bestellung abschließen kann
 
         loginAsDefaultUser(); // Meldet den festen Testbenutzer an und setzt den Warenkorb zurück
 

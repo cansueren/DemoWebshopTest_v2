@@ -1,11 +1,11 @@
-package tests; // Diese Datei gehört zum Package tests für Testklassen
+package tests;                                      // Diese Datei gehört zum Package tests für Testklassen
 
-import base.BaseTest; // Importiert unsere Basisklasse mit Browser-Setup und Login-Daten
-import org.junit.jupiter.api.Test; // Importiert die @Test Annotation für JUnit
-import pages.LoginPage; // Importiert unsere Login-Seitenklasse
-import org.junit.jupiter.api.Assertions; // Importiert Assertion-Befehle zum Prüfen von Erwartungen
+import base.BaseTest;                               // Importiert unsere Basisklasse mit Browser-Setup und Login-Daten
+import org.junit.jupiter.api.Test;                  // Importiert die @Test Annotation für JUnit
+import pages.LoginPage;                             // Importiert unsere Login-Seitenklasse
+import org.junit.jupiter.api.Assertions;            // Importiert Assertion-Befehle zum Prüfen von Erwartungen
 
-public class LoginTest extends BaseTest { // Testklasse erbt Browser-Setup und Variablen aus BaseTest
+public class LoginTest extends BaseTest {           // Testklasse erbt Browser-Setup und Variablen aus BaseTest
 
     @Test // Markiert die folgende Methode als ausführbaren Test
     public void userCanLoginSuccessfully() { // Test prüft, ob ein Benutzer sich erfolgreich einloggen kann

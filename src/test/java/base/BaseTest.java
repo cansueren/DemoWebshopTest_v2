@@ -37,13 +37,13 @@ public class BaseTest {
 
 
     @AfterEach // Wird nach jedem Test automatisch ausgeführt und räumt die Testumgebung auf
-    public void cleanUp() { // Aufräum-Methode nach jedem Test, z. B. Browser sauber schließen und Testumgebung zurücksetzen
+    public void cleanUp() { //  Browser sauber schließen und Testumgebung zurücksetzen
 
         driver.quit();
     }
 
-    // Führt einen Login mit unserem festen Test-User aus
-    // Vorteil: Wir können diese Methode in jedem Test wiederverwenden
+    // Führt einen Login mit  festen Test-User aus
+    // Wiederverwendbar in jeden Test
     protected void loginAsDefaultUser() {
 
         // Erstelle ein neues LoginPage-Objekt und übergebe den Browser (driver)

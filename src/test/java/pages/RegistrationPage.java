@@ -1,8 +1,7 @@
-package pages;                          // Diese Datei gehört zum Package pages für Seitenklassen im Page Object Model
+package pages;                                              // Diese Datei gehört zum Package pages für Seitenklassen im Page Object Model
 
-import org.openqa.selenium.By;          // Importiert Locator-Werkzeuge, um Elemente auf der Webseite zu finden
-import org.openqa.selenium.WebDriver;   // Importiert den Browser-Treiber, damit diese Seite mit dem geöffneten Browser arbeiten kann
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.By;                              // Importiert Locator-Werkzeuge, um Elemente auf der Webseite zu finden
+import org.openqa.selenium.WebDriver;                       // Importiert den Browser-Treiber, damit diese Seite mit dem geöffneten Browser arbeiten kann
 import org.openqa.selenium.support.ui.ExpectedConditions;   // Importiert fertige Wait-Bedingungen
 import org.openqa.selenium.support.ui.WebDriverWait;        // Importiert WebDriverWait, um gezielt auf Elemente zu warten
 
@@ -11,8 +10,8 @@ import java.time.Duration;                                  // Importiert Durati
 
 public class RegistrationPage {                             // Seitenklasse für die Registrierungsseite mit allen Aktionen und Elementen
 
-    private WebDriver driver; // Speichert den Browser dieser Seite; private wird genutzt, weil der driver nur innerhalb dieser Page-Klasse verwendet werden soll
-    private WebDriverWait wait; // Speichert den expliziten Wait, damit wir gezielt auf Elemente warten können
+    private WebDriver driver;                               // Speichert den Browser dieser Seite; private wird genutzt, weil der driver nur innerhalb dieser Page-Klasse verwendet werden soll
+    private WebDriverWait wait;                             // Speichert den expliziten Wait, damit wir gezielt auf Elemente warten können
 
 
     public RegistrationPage(WebDriver driver) { // Konstruktor erhält den geöffneten Browser beim Erstellen der Page

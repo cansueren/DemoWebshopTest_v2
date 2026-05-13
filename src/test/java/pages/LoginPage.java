@@ -7,10 +7,11 @@ import org.openqa.selenium.support.ui.WebDriverWait;        // Importiert WebDri
 
 import java.time.Duration;                                  // Importiert Duration, um die maximale Wartezeit festzulegen
 
+
 public class LoginPage {                                    // Seitenklasse für die Login-Seite mit allen Aktionen und Elementen
 
-    private WebDriver driver; // Speichert den Browser dieser Seite; private weil nur innerhalb dieser Klasse genutzt
-    private WebDriverWait wait; // Speichert den expliziten Wait, damit alle Methoden gezielt auf Elemente warten können
+    private WebDriver driver;                               // Speichert den Browser dieser Seite; private weil nur innerhalb dieser Klasse genutzt
+    private WebDriverWait wait;                             // Speichert den expliziten Wait, damit alle Methoden gezielt auf Elemente warten können
 
 
     public LoginPage(WebDriver driver) { // Konstruktor erhält den geöffneten Browser beim Erstellen der Seite
