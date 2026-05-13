@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;                   // Importiert den Browse
 
 public class RegistrationPage extends BasePage {        // RegistrationPage erbt gemeinsame Selenium-Hilfsmethoden aus BasePage
 
-
     public RegistrationPage(WebDriver driver) {         // Konstruktor erhält den geöffneten Browser beim Erstellen der Page
         super(driver);                                  // Übergibt den driver an die BasePage, damit dort driver und wait initialisiert werden
     }
