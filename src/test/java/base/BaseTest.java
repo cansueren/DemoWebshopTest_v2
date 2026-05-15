@@ -28,6 +28,13 @@ public class BaseTest {
 
         options.addArguments("--disable-notifications"); // Deaktiviert Browser Benachrichtigungen, damit keine Popups erscheinen
 
+        if ("true".equals(System.getenv("GITHUB_ACTIONS"))) { // Prüft, ob die Tests in GitHub Actions laufen
+            options.addArguments("--headless=new"); // Startet Chrome ohne sichtbares Browserfenster in der CI-Umgebung
+            options.addArguments("--window-size=1920,1080"); // Setzt eine feste Fenstergröße für stabile Elementpositionen
+            options.addArguments("--no-sandbox"); // Erhöht die Kompatibilität in Linux-CI-Umgebungen
+            options.addArguments("--disable-dev-shm-usage"); // Verhindert Speicherprobleme in Container- oder CI-Umgebungen
+        }
+
         driver = new ChromeDriver(options); // Startet den Chrome Browser mit unseren zuvor festgelegten Optionen und speichert ihn im driver
 
         driver.manage().window().maximize(); // Maximiert das Browserfenster für bessere Sichtbarkeit und stabile Elementpositionen

@@ -85,14 +85,14 @@ public class E2ETest extends BaseTest { // E2E-Testklasse; erbt Browser-Setup, d
         cartPage.clickTermsButton(); // Bestätigt die Terms of Service Checkbox
         cartPage.clickCheckoutButton(); // Klickt auf den Checkout-Button
 
-        // Checkout durchführen
+        // Checkout durchführen, Füllt die Pflichtfelder der Billing Address aus
         checkoutPage.fillBillingAddress(
                 country,
                 city,
                 address,
                 zip,
                 phone
-        ); // Füllt die Pflichtfelder der Billing Address aus
+        );
 
         checkoutPage.clickContinueBilling(); // Schließt den Billing-Step ab
         checkoutPage.clickContinueShippingAddress(); // Schließt den Shipping-Address-Step ab
