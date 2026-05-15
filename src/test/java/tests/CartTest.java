@@ -30,19 +30,25 @@ public class CartTest extends BaseTest {            // CartTest erbt den WebDriv
         // Warenkorb öffnen
         cartPage.openShoppingCart();
 
-        // Prüfen, ob Produkt im Warenkorb ist
+        // 1. Prüfen, ob Produkt im Warenkorb ist
         Assertions.assertTrue(
                 cartPage.isProductInCart(productName),
                 "Produkt wurde nicht zum Warenkorb hinzugefügt"
         );
 
-        // Menge auslesen
+        // 2. Menge auslesen
         int actualQuantity = cartPage.getQuantityForProduct(productName);
 
+        // 3. Menge prüfen
         Assertions.assertEquals(
                 expectedQuantity,
                 actualQuantity,
                 "Erwartet: " + expectedQuantity + ", aber war: " + actualQuantity
         );
+
+        // Konsolenausgabe
+        System.out.println("\nCart Test Summary:"); // Startet eine übersichtliche Konsolenausgabe für den CartTest
+        System.out.println("Product Name: " + productName);
+        System.out.println("Quantity: " + actualQuantity);
     }
 }

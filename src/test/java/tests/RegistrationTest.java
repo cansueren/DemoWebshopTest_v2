@@ -1,40 +1,45 @@
-package tests;                                          // Diese Datei gehört zum Package tests für ausführbare Testklassen
+package tests; // Diese Datei gehört zum Package tests für ausführbare Testklassen
 
-import base.BaseTest;                                   // Importiert unsere Basisklasse mit driver, Browserstart und cleanUp
-import org.junit.jupiter.api.Test;                      // Importiert @Test, damit JUnit diese Methode als Test ausführt
-import pages.RegistrationPage;                          // Importiert unsere Page-Klasse mit den Registrierungsfunktionen
-import org.junit.jupiter.api.Assertions;                // Importiert Assertion-Befehle zum Prüfen von Erwartungen
-import utils.RandomDataUtil;                            // Importiert die Hilfsklasse zum Erzeugen dynamischer Testdaten
+import base.BaseTest; // Importiert unsere Basisklasse mit Browser-Setup, driver und Cleanup
+import org.junit.jupiter.api.Assertions; // Importiert Assertion-Befehle zum Prüfen von erwarteten Ergebnissen
+import org.junit.jupiter.api.Test; // Importiert @Test, damit JUnit diese Methode als Test erkennt
+import pages.RegistrationPage; // Importiert unsere RegistrationPage mit allen Registrierungsaktionen
+import utils.RandomDataUtil; // Importiert die Hilfsklasse zum Erzeugen dynamischer Testdaten
 
-public class RegistrationTest extends BaseTest {        // Testklasse erbt Browser Setup und driver aus BaseTest
-
+public class RegistrationTest extends BaseTest { // Testklasse für Registrierung; erbt Browser-Setup, driver und Cleanup aus BaseTest
 
     @Test // Markiert die folgende Methode als ausführbaren JUnit-Test
-    public void userCanRegisterSuccessfully() { // Testmethode prüft, ob die Registrierungsseite geöffnet werden kann
+    public void userCanRegisterSuccessfully() { // Test prüft, ob ein Benutzer sich erfolgreich registrieren kann
 
-        RegistrationPage registrationPage = new RegistrationPage(driver); // Erstellt das Seitenobjekt und übergibt den geöffneten Browser aus BaseTest
+        RegistrationPage registrationPage = new RegistrationPage(driver); // Erstellt das Page Object und übergibt den geöffneten Browser
 
-        registrationPage.openRegistrationPage(); // Ruft unsere Page-Methode auf, die per Selenium auf Register klickt
-        registrationPage.selectMaleGender(); // Ruft die Page-Methode auf und wählt den Male-Radiobutton au
-        registrationPage.enterFirstName("Max"); // Übergibt den Text Can an unsere Methode und trägt ihn ins Feld ein
-        registrationPage.enterLastName("Mustermann"); // Wir übergeben unseren Nachnamen Text "Suren"
-
+        String firstName = "Max"; // Speichert den Vornamen zentral für Registrierung und Konsolenausgabe
+        String lastName = "Mustermann"; // Speichert den Nachnamen zentral für Registrierung und Konsolenausgabe
         String email = RandomDataUtil.generateEmail(); // Erzeugt eine eindeutige E-Mail-Adresse für die Registrierung
-        registrationPage.enterEmail(email); // Übergibt die erzeugte Email an unsere Page-Methode und trägt sie ein
+        String password = "Test123!"; // Speichert das Passwort zentral für Registrierung und Konsolenausgabe
 
-        String password = "Test123!"; // Speichert das Passwort als Textvariable, damit wir es für beide Felder verwenden
-        registrationPage.enterPassword(password); // Trägt das Passwort in das erste Passwortfeld ein
-        registrationPage.enterConfirmPassword(password); // Trägt dasselbe Passwort in das Bestätigungsfeld ein
+        registrationPage.openRegistrationPage(); // Öffnet die Registrierungsseite
+        registrationPage.selectMaleGender(); // Wählt den Male-Radiobutton aus
+        registrationPage.enterFirstName(firstName); // Trägt den Vornamen ein
+        registrationPage.enterLastName(lastName); // Trägt den Nachnamen ein
+        registrationPage.enterEmail(email); // Trägt die dynamische E-Mail-Adresse ein
+        registrationPage.enterPassword(password); // Trägt das Passwort ein
+        registrationPage.enterConfirmPassword(password); // Bestätigt das Passwort
 
-        registrationPage.clickRegisterButton(); // Register-Button klicken
+        registrationPage.clickRegisterButton(); // Klickt auf den Register-Button
 
-        Assertions.assertTrue(
+        Assertions.assertTrue(  // Prüft, ob die Registrierung erfolgreich war
                 registrationPage.isRegistrationSuccessful(),
                 "Registrierung war nicht erfolgreich!"
-        ); // Prüft über die Page-Methode, ob die Erfolgsmeldung sichtbar ist
+        );
+
+        // Konsolenausgabe
+        System.out.println("\nRegistration Test Data:");
+        System.out.println("First Name: " + firstName);
+        System.out.println("Last Name: " + lastName);
+        System.out.println("E-Mail: " + email);
+        System.out.println("Password: " + "*".repeat(password.length()));
 
         registrationPage.clickLogoutButton(); // Meldet den frisch registrierten Benutzer wieder ab
-
     }
-
 }

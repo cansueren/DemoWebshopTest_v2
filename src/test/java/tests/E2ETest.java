@@ -19,6 +19,8 @@ public class E2ETest extends BaseTest { // E2E-Testklasse; erbt Browser-Setup, d
         CartPage cartPage = new CartPage(driver); // Erstellt das Page Object für Warenkorb- und Produktaktionen
         CheckoutPage checkoutPage = new CheckoutPage(driver); // Erstellt das Page Object für den Checkout
 
+        String firstName = "Max"; // Speichert den Vornamen zentral für Registrierung und Konsolenausgabe
+        String lastName = "Mustermann"; // Speichert den Nachnamen zentral für Registrierung und Konsolenausgabe
         String email = RandomDataUtil.generateEmail(); // Erzeugt eine eindeutige E-Mail-Adresse für die Registrierung
         String password = "Test123!"; // Speichert das Passwort zentral für Registrierung und Login
 
@@ -34,8 +36,8 @@ public class E2ETest extends BaseTest { // E2E-Testklasse; erbt Browser-Setup, d
         // Registrierung
         registrationPage.openRegistrationPage(); // Öffnet die Registrierungsseite
         registrationPage.selectMaleGender(); // Wählt den Male-Radiobutton aus
-        registrationPage.enterFirstName("Max"); // Trägt den Vornamen ein
-        registrationPage.enterLastName("Mustermann"); // Trägt den Nachnamen ein
+        registrationPage.enterFirstName(firstName); // Trägt den Vornamen ein
+        registrationPage.enterLastName(lastName); // Trägt den Nachnamen ein
         registrationPage.enterEmail(email); // Trägt die dynamische E-Mail-Adresse ein
         registrationPage.enterPassword(password); // Trägt das Passwort ein
         registrationPage.enterConfirmPassword(password); // Bestätigt das Passwort
@@ -106,7 +108,20 @@ public class E2ETest extends BaseTest { // E2E-Testklasse; erbt Browser-Setup, d
 
         String orderNumber = checkoutPage.getOrderNumber(); // Liest die Bestellnummer aus der Abschlussseite aus
 
-        System.out.println("Order Number: " + orderNumber); // Gibt die Bestellnummer in der Konsole aus
+        // Konsolenausgabe
+        System.out.println("\nE2E Test Summary:");
+        System.out.println("First Name: " + firstName);
+        System.out.println("Last Name: " + lastName);
+        System.out.println("E-Mail: " + email);
+        System.out.println("Password: " + "*".repeat(password.length()));
+        System.out.println("Product Name: " + productName);
+        System.out.println("Quantity: " + actualQuantity);
+        System.out.println("Country: " + country);
+        System.out.println("City: " + city);
+        System.out.println("Address: " + address);
+        System.out.println("Zip: " + zip);
+        System.out.println("Phone: " + phone);
+        System.out.println("Order Number: " + orderNumber);
 
         Assertions.assertFalse(
                 orderNumber.isEmpty(),

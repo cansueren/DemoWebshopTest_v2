@@ -42,7 +42,7 @@ public class BaseTest {
         driver.quit();
     }
 
-    // Führt einen Login mit  festen Test-User aus
+    // Führt einen Login mit festen Test-User aus
     // Wiederverwendbar in jeden Test
     protected void loginAsDefaultUser() {
 

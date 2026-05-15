@@ -54,7 +54,15 @@ public class CheckoutTest extends BaseTest {        // Testklasse für den Check
 
         String orderNumber = checkoutPage.getOrderNumber(); // Liest die Bestellnummer aus der Abschlussseite aus
 
-        System.out.println("Order Nummer: " + orderNumber); // Gibt die Bestellnummer in der Konsole aus
+        // Konsolenausgabe
+        System.out.println("\nCheckout Test Summary:"); // Startet eine übersichtliche Konsolenausgabe für den CheckoutTest
+        System.out.println("Product Name: " + productName); // Gibt den bestellten Produktnamen aus
+        System.out.println("Country: " + country); // Gibt das verwendete Land aus
+        System.out.println("City: " + city); // Gibt die verwendete Stadt aus
+        System.out.println("Address: " + address); // Gibt die verwendete Adresse aus
+        System.out.println("Zip: " + zip); // Gibt die verwendete Postleitzahl aus
+        System.out.println("Phone: " + phone); // Gibt die verwendete Telefonnummer aus
+        System.out.println("Order Number: " + orderNumber); // Gibt die erzeugte Bestellnummer aus
 
         Assertions.assertFalse(
                 orderNumber.isEmpty(),
