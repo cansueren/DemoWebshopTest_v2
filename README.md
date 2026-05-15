@@ -1,71 +1,115 @@
-# Testautomatisierung Demo Webshop (Selenium + Java)
+# Demo Web Shop Test Automation
 
-Dieses Projekt automatisiert den Kaufprozess auf der Demo-Webshop-Seite unter Verwendung von Java, Selenium WebDriver und JUnit. 
+![Selenium Tests](https://github.com/cansueren/DemoWebshopTest_v2/actions/workflows/selenium-tests.yml/badge.svg)
 
-Das Projekt umfasst die Testautomatisierung der Bereiche Registrierung, Authentifizierung, Warenkorb und Checkout als End-to-End-Szenarien unter Anwendung des Page Object Models.
+This project automates key user flows of the Demo Web Shop using Java, Selenium WebDriver, JUnit 5 and Maven.
 
+The test suite covers registration, login, cart validation and checkout, including a full end-to-end purchase flow based on the Page Object Model.
 
+## Application Under Test
 
-## Projektbeschreibung
-Ziel ist die Umsetzung einer strukturierten Testautomatisierung unter Anwendung moderner Best Practices.
+[Demo Web Shop](https://demowebshop.tricentis.com/)
 
-Getestete Anwendung:
-[Demo Webshop](http://demowebshop.tricentis.com)
+## Test Scenarios
 
----
+The project currently covers the following scenarios:
 
-## Ziel der Aufgabe
-Automatisierung folgender End-to-End Test-Szenarien:
+1. User registration with dynamic test data
+2. User authentication with a predefined test account
+3. Product search and add-to-cart flow
+4. Cart validation including product name and quantity
+5. Checkout process until order confirmation
+6. Full end-to-end purchase flow
 
-1. Registrierung eines neuen Benutzers
-2. Authentifizierung (Login)
-3. Auswahl eines Produkts und Hinzufügen zum Warenkorb
-4. Durchführung des Checkout-Prozesses bis zur Bestellbestätigung
-
----
-
-## Verwendete Technologien
+## Tech Stack
 
 - Java
 - Selenium WebDriver
 - JUnit 5
 - Maven
 - IntelliJ IDEA
+- GitHub Actions
 
----
+## Project Structure
 
-## Projektstruktur
+```text
+src/test/java
+├── base
+│   └── BaseTest.java
+├── pages
+│   ├── BasePage.java
+│   ├── RegistrationPage.java
+│   ├── LoginPage.java
+│   ├── CartPage.java
+│   └── CheckoutPage.java
+├── tests
+│   ├── RegistrationTest.java
+│   ├── LoginTest.java
+│   ├── CartTest.java
+│   ├── CheckoutTest.java
+│   └── E2ETest.java
+└── utils
+    └── RandomDataUtil.java
+```
 
-Das Projekt folgt dem Page Object Model (POM):
+## Architecture
 
-- `pages/` → enthält Seitenklassen (z. B. CartPage, LoginPage)
-- `tests/` → enthält Testklassen (z. B. E2ETest, CartTest)
-- `base/` → Basis-Setup für WebDriver
-- `utils/` → wiederverwendbare Helfer (z. B. Waits, Actions, Testdaten)
+The project follows the Page Object Model.
 
----
+- `BaseTest` handles browser setup, cleanup and shared test login logic.
+- `BasePage` provides reusable Selenium helper methods such as `click`, `type`, `getText`, `isVisible` and dropdown selection.
+- Page classes contain page-specific actions and validations.
+- Test classes describe the test flow and assertions.
+- Utility classes provide reusable test data helpers.
 
-## Features
+## Key Features
 
-- Strukturierte Testarchitektur (Page Object Model)
-- Wiederverwendbare Utilities (Waits, Actions, Generatoren)
-- End-to-End Testabdeckung
-- Verwendung von Assertions zur Validierung
-- Dynamische Testdaten (z. B. zufällige E-Mail für Registrierung)
+- Clean Page Object Model structure
+- Centralized WebDriver setup in `BaseTest`
+- Shared Selenium actions through `BasePage`
+- Explicit waits for stable UI interaction
+- Dynamic email generation for registration tests
+- Assertions for registration, login, cart and checkout validation
+- Console summaries for important test data and order numbers
+- GitHub Actions CI pipeline for automated test execution
 
----
+## Running Tests Locally
 
-## Code-Qualität
+Run all tests with Maven:
 
-- Trennung von Testlogik und Seitenlogik
-- Reduzierung von Code-Duplikaten durch Utilities
-- Lesbare und wartbare Teststruktur
+```bash
+mvn test
+```
 
----
+Alternatively, tests can be executed directly from IntelliJ IDEA using the Maven tool window:
 
-## Hinweise
+```text
+Maven → Lifecycle → test
+```
 
-Dieses Projekt wurde im Rahmen einer Lern- bzw. Übungsaufgabe erstellt, mit Fokus auf:
-- Testautomatisierung
-- saubere Code-Struktur
-- Einsatz von Best Practices
+## Continuous Integration
+
+This project uses GitHub Actions to run the Selenium test suite automatically on every push and pull request.
+
+The CI workflow includes:
+
+- Java 17 setup
+- Maven dependency caching
+- Headless Chrome execution
+- Selenium/JUnit test execution via Maven
+
+Workflow file:
+
+```text
+.github/workflows/selenium-tests.yml
+```
+
+## Notes
+
+This project was created as a learning and practice project with a focus on:
+
+- test automation
+- maintainable test architecture
+- Page Object Model design
+- clean code structure
+- CI integration with GitHub Actions
