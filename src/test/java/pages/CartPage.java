@@ -21,12 +21,19 @@ public class CartPage extends BasePage {                        // CartPage erbt
         click(By.linkText("14.1-inch Laptop")); // Nutzt die BasePage-click-Methode und klickt den Produktlink stabil an
     }
 
-    public void clickAddToCart() { // Methode: fügt das Produkt dem Warenkorb hinzu
-        click(By.cssSelector("input[value='Add to cart']")); // Nutzt die BasePage-click-Methode und klickt den Add-to-cart-Button stabil an
+    public void clickAddToCart() { // Methode: fügt das Produkt dem Warenkorb hinzu und schließt die Erfolgsmeldung
+
+        click(By.cssSelector("input[value='Add to cart']")); // Klickt auf den Add-to-cart-Button über die BasePage-click-Methode
 
         wait.until(ExpectedConditions.visibilityOfElementLocated(
                 By.cssSelector(".bar-notification.success")
         )); // Wartet, bis die grüne Erfolgsmeldung sichtbar ist
+
+        click(By.cssSelector("#bar-notification .close")); // Schließt die grüne Erfolgsmeldung, damit sie keine weiteren Klicks blockiert
+
+        wait.until(ExpectedConditions.invisibilityOfElementLocated(
+                By.id("bar-notification")
+        )); // Wartet, bis die Erfolgsmeldung nicht mehr sichtbar ist
     }
 
     public void openShoppingCart() { // Methode: öffnet den Warenkorb über den Warenkorb-Link
